@@ -24,6 +24,12 @@ class PoseNetG(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetR34(nn.Module):
     def __init__(self):
@@ -46,6 +52,12 @@ class PoseNetR34(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetR18(nn.Module):
     def __init__(self):
@@ -68,6 +80,12 @@ class PoseNetR18(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetEffB0(nn.Module):
     def __init__(self):
@@ -90,6 +108,12 @@ class PoseNetEffB0(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetEffB1(nn.Module):
     def __init__(self):
@@ -112,6 +136,12 @@ class PoseNetEffB1(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetMobV3L(nn.Module):
     def __init__(self):
@@ -134,6 +164,12 @@ class PoseNetMobV3L(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
 
 class PoseNetMobV3S(nn.Module):
     def __init__(self):
@@ -156,3 +192,9 @@ class PoseNetMobV3S(nn.Module):
         quat = pose[:, 3:]
         quat = quat / quat.norm(p=2, dim=1, keepdim=True)
         return torch.cat([pos, quat], dim=1)
+    
+    def save(self, path: str):
+        torch.save(self.state_dict(), path)
+
+    def load(self, path: str):
+        self.load_state_dict(torch.load(path))
