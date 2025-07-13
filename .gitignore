@@ -64,3 +64,4 @@ logs/
 checkpoints/
 runs/
 *.log 
+train.sh
