@@ -4,6 +4,7 @@ import json
 import os
 from PIL import Image
 from torchvision import transforms
+import numpy as np
 
 class PoseNetDataset(Dataset):
     def __init__(self, data_path: str, split: str):
@@ -15,8 +16,15 @@ class PoseNetDataset(Dataset):
         self.transforms = transforms.Compose([
             transforms.CenterCrop(224),
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
+
+        self.mean_rgb = torch.tensor(self.compute_per_scene_mean()).to(torch.float32).view(3, 1, 1)
+
+    def compute_per_scene_mean(self):
+        imgs = [Image.open(img_path).convert("RGB") for img_path in self.img_paths]
+        pixels = np.concatenate([np.asarray(img).reshape(-1, 3) for img in imgs], axis=0)
+        mean_rgb = np.mean(pixels, axis=0) / 255.0
+        return mean_rgb.tolist()
 
     def __len__(self):
         return len(self.img_paths)
@@ -33,6 +41,7 @@ class PoseNetDataset(Dataset):
 
         img = img.resize((new_w, new_h), Image.BILINEAR)
         img = self.transforms(img)
+        img = img - self.mean_rgb
         return img
     
     def __getitem__(self, idx):
@@ -40,6 +49,7 @@ class PoseNetDataset(Dataset):
         pose = self.poses[idx]
         pose = torch.tensor(pose, dtype=torch.float32)
         img = self.transform(img_path)
+
         return img, pose
     
 def load_data(data_path: str, split: str, batch_size: int, num_workers: int=os.cpu_count()//2):
