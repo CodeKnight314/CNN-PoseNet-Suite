@@ -67,8 +67,9 @@ def read_split(path: str):
     return splits
 
 def handle_scene(path: str, output_path: str):
+    os.makedirs(output_path, exist_ok=True)
     train_split = read_split(os.path.join(path, "TrainSplit.txt"))
-    test_spilt = read_split(os.path.join(path, "TestSplit.txt"))
+    test_split = read_split(os.path.join(path, "TestSplit.txt"))
 
     train_data = {}
     test_data = {}
@@ -83,7 +84,7 @@ def handle_scene(path: str, output_path: str):
             pose = matrix_to_posenet_vector(label_matrix)
             train_data[rgb_image] = pose.tolist()
 
-    for split in tqdm(test_spilt, desc="Processing test data"):
+    for split in tqdm(test_split, desc="Processing test data"):
         seq_path = os.path.join(path, split)
         
         rgb_images = glob(os.path.join(seq_path, "*.color.png"))
@@ -100,7 +101,7 @@ def handle_scene(path: str, output_path: str):
 def main(args):
     for scene in os.listdir(args.p):
         scene_path = os.path.join(args.p, scene)
-        handle_scene(scene_path, args.o)
+        handle_scene(scene_path, os.path.join(args.o, scene))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
