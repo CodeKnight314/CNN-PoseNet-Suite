@@ -1,0 +1,14 @@
+model: "pose_net_effb0"
+
+lr: 0.00001
+weight_decay: 0.00001
+momentum: 0.9
+beta: 500
+epochs: 100
+batch_size: 128
+num_workers: 64
+
+step_size: 80
+gamma: 0.1
+
+save_interval: 10 
