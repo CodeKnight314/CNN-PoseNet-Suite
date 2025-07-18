@@ -1,4 +1,4 @@
-# 6DoF Camera Pose Estimation
+# CNN PoseNet Suite
 
 ![Visualized Trajectory](resources/graphs/comparison.gif)
 
