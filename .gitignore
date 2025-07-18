@@ -1,6 +1,3 @@
-# Download script
-download.sh
-
 # Python
 __pycache__/
 *.py[cod]
