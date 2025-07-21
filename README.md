@@ -12,9 +12,7 @@ The following graphs illustrate the performance of the trained models on 6 of th
 
 **Per-Scene Losses**
 This graph shows the translation and rotation errors for each model across the six scenes. The evaluation loss is evaluated with the cost function:
-$$
-\mathcal{L} = \|\bar{x} - x\|^2 + \beta \cdot \left\|\frac{\bar{p}}{\|\bar{p}\|} - p \right\|^2
-$$
+![Loss Function](https://latex.codecogs.com/png.latex?\mathcal{L}%20=%20\|\bar{x}%20-%20x\|^2%20+%20\beta%20\cdot%20\left\|\frac{\bar{p}}{\|\bar{p}\|}%20-%20p%20\right\|^2)
 where $\bar{x}$ and $\bar{p}$ are predictions from models, $x$ and $p$ are ground truth labels from dataset, and $\beta$ is the translation coefficient, set to 500 by default. More data during evaluation can be found under `resources`, with a more comprehensive `README.md` that displays the separate losses for each model.
 ![Per-Scene Losses](resources/graphs/per_scene_losses.png)
 
